@@ -38,51 +38,6 @@ if(NOT DEFINED CMAKE_INSTALL_CMAKEDIR)
     set(CMAKE_INSTALL_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/cmake/nanopb")
 endif()
 
-#if(nanopb_BUILD_GENERATOR)
-#    set(generator_protos nanopb)
-#
-#    find_package(Python REQUIRED)
-#    execute_process(
-#            COMMAND ${Python_EXECUTABLE} -c
-#            "from distutils import sysconfig; print(sysconfig.get_python_lib(prefix=''))"
-#            OUTPUT_VARIABLE PYTHON_INSTDIR
-#            OUTPUT_STRIP_TRAILING_WHITESPACE
-#    )
-#
-#    foreach(generator_proto IN LISTS generator_protos)
-#        string(REGEX REPLACE "([^;]+)" "${PROJECT_SOURCE_DIR}/generator/proto/\\1.proto" generator_proto_file "${generator_proto}")
-#        string(REGEX REPLACE "([^;]+)" "\\1_pb2.py" generator_proto_py_file "${generator_proto}")
-#        add_custom_command(
-#                OUTPUT ${generator_proto_py_file}
-#                COMMAND ${nanopb_PROTOC_PATH} --python_out=${PROJECT_BINARY_DIR} -I${PROJECT_SOURCE_DIR}/generator/proto ${generator_proto_file}
-#                DEPENDS ${generator_proto_file}
-#        )
-#        add_custom_target("generate_${generator_proto_py_file}" ALL DEPENDS ${generator_proto_py_file})
-#        install(
-#            FILES ${PROJECT_BINARY_DIR}/${generator_proto_py_file}
-#                  ${generator_proto_file}
-#            DESTINATION ${PYTHON_INSTDIR}/proto/
-#        )
-#    endforeach()
-#endif()
-
-#install( FILES generator/proto/_utils.py
-#         DESTINATION ${PYTHON_INSTDIR}/proto/ )
-
-#if( WIN32 )
-#    install(
-#            PROGRAMS generator/nanopb_generator.py
-#            generator/protoc-gen-nanopb.bat
-#            DESTINATION ${CMAKE_INSTALL_BINDIR}
-#    )
-#else()
-#    install(
-#        PROGRAMS generator/nanopb_generator.py
-#                 generator/protoc-gen-nanopb
-#       DESTINATION ${CMAKE_INSTALL_BINDIR}
-#    )
-#endif()
-
 if(nanopb_BUILD_RUNTIME)
     if(BUILD_SHARED_LIBS)
         add_library(protobuf-nanopb SHARED
