@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(nanopb C)
 
-set(nanopb_VERSION_STRING nanopb-0.4.4)
+set(nanopb_VERSION_STRING nanopb-0.4.6-dev)
 set(nanopb_SOVERSION 0)
 
 string(REPLACE "nanopb-" "" nanopb_VERSION ${nanopb_VERSION_STRING})
@@ -37,6 +37,8 @@ endif()
 if(NOT DEFINED CMAKE_INSTALL_CMAKEDIR)
     set(CMAKE_INSTALL_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/cmake/nanopb")
 endif()
+
+find_package(Python REQUIRED)
 
 if(nanopb_BUILD_RUNTIME)
     if(BUILD_SHARED_LIBS)
